@@ -1,0 +1,93 @@
+1. Query 1:
+===========
+SELECT * FROM address
+WHERE address_id BETWEEN 51 AND 100;
+
+This query displays the address details between 51 to 100 based on the address_id.
+
+2. Query 2:
+===========
+SELECT f.film_id,f.description, a.actor_id 
+FROM film f 
+LEFT JOIN film_actor a ON f.film_id = a.film_id
+GROUP BY f.film_id,f.description,a.actor_id
+ORDER BY a.actor_id ASC;
+
+This query used left join operation display the details in the film table .
+
+3. Query 3:
+===========
+SELECT * FROM film
+WHERE description LIKE '%Dog%'
+LIMIT 50;
+
+This query identifies the dog string in the film description and displays the data till 50 count.
+
+4. Query 4:
+===========
+SELECT a.address_id, a.district, a.city_id, c.city
+FROM address a 
+INNER JOIN city c ON a.district = c.city;
+
+Using the inner join operation this query displays the city with the address table.
+
+5. Query 5:
+===========
+SELECT customer_id
+FROM customer
+WHERE EXISTS (SELECT inventory_id FROM rental WHERE customer.customer_id = rental.customer_id AND inventory_id > 4000)
+ORDER BY customer_id DESC;
+
+This query displays the customer details whose inventory_id is greater than 4000. 
+
+6. Query 6:
+===========
+SELECT c.category_id, MAX(f.replacement_cost) AS replacement_cost
+FROM category c
+JOIN film_category fc ON c.category_id = fc.category_id
+JOIN film f ON fc.film_id = f.film_id
+GROUP BY c.category_id
+
+This query determines the maximum amount of replacement_cost and used join operations to display the same.
+
+
+7. Query 7:
+===========
+SELECT customer_id, payment_date,
+ LAG(payment_date) OVER (PARTITION BY customer_id ORDER BY payment_date) AS previous_payment_date
+FROM 
+ payment
+ORDER BY 
+ customer_id, payment_date
+LIMIT 100;
+
+This query used the lag operation for payment_date to see the previous record and displays the details. 
+
+8. Query8:
+==========
+SELECT first_name,
+ length(first_name) AS name_length,
+ CASE
+ WHEN length(first_name) > 4 THEN 'LONG'
+ ELSE 'short'
+ END AS name_category
+FROM customer
+
+This query displays names with the conditional statement by calculating the length of the name to determine its 'Short' or 'Long'.
+
+9. Query9:
+==========
+with staff_id_table as (select staff_id from staff)
+select * from store
+cross join staff_id_table
+
+This query used the cross join operation to join the staff_id details in store table.
+
+10. Query10:
+============
+
+SELECT staff_id, COUNT(*) AS staff_count
+FROM rental
+GROUP BY staff_id;
+
+This query displays the staff details with count.
