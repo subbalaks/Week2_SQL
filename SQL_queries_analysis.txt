@@ -13,7 +13,7 @@ LEFT JOIN film_actor a ON f.film_id = a.film_id
 GROUP BY f.film_id,f.description,a.actor_id
 ORDER BY a.actor_id ASC;
 
-This query used left join operation display the details in the film table .
+This query used left join operation display the film details.
 
 3. Query 3:
 ===========
@@ -29,7 +29,7 @@ SELECT a.address_id, a.district, a.city_id, c.city
 FROM address a 
 INNER JOIN city c ON a.district = c.city;
 
-Using the inner join operation this query displays the city with the address table.
+Using the inner join operation this query displays the city in the address table.
 
 5. Query 5:
 ===========
